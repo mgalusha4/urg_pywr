@@ -1,0 +1,37 @@
+{
+    "metadata": {
+      "title": "model.json - riogrande",
+      "description": "this is the top level json file for RG, calling to the other json files",
+      "minimum_version": "1.2",
+      "hydrologic_model_type": "SACSMA",
+      "author": "mgalusha"
+    },
+
+    "timestepper": {
+      "start": "1980-01-01",
+      "end": "1982-12-31",
+      "timestep": "1D",
+      "comment": "this script runs the historic period for this project on observed inputs"
+    },
+
+    "includes": [
+        "upper_rgb.json"
+    ],
+    "nodes": [
+      {
+        "name": "model_outlet",
+        "type": "output",
+        "cost": -100
+      }
+    ],
+    "edges": [
+      ["URG1_TAOS_return_flow", "model_outlet"]
+    ],
+    "parameters": {
+      "irr_loss_factor": {
+          "type": "constant",
+          "value": 0.5,
+          "comment": "this factor is used across many json files"
+      }
+    }
+}

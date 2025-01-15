@@ -1,0 +1,24 @@
+// RioGrande
+digraph {
+	subgraph model {
+		model_outlet [color=red fontcolor=white shape=ellipse style=filled]
+		URG1_TAOS_return_flow -> model_outlet
+		label=model
+	}
+	subgraph upper_rgb {
+		lobatos_gauge_inflow [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		rio_pueblo_taos_inflow [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		cerro_gauge [color=hotpink fontcolor=white shape=rectangle style=filled]
+		URG1_TAOS_diversion_point [color=hotpink fontcolor=white shape=rectangle style=filled]
+		URG1_TAOS_irrigation_loss [color=red fontcolor=white shape=ellipse style=filled]
+		URG1_TAOS_irrigation [color=red fontcolor=white shape=ellipse style=filled]
+		URG1_TAOS_return_flow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		lobatos_gauge_inflow -> cerro_gauge
+		rio_pueblo_taos_inflow -> cerro_gauge
+		cerro_gauge -> URG1_TAOS_diversion_point
+		URG1_TAOS_diversion_point -> URG1_TAOS_irrigation
+		URG1_TAOS_diversion_point -> URG1_TAOS_irrigation_loss
+		URG1_TAOS_diversion_point -> URG1_TAOS_return_flow
+		label=upper_rgb
+	}
+}

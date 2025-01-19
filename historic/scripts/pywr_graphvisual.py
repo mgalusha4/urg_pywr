@@ -25,7 +25,11 @@ def search_includes(parent_file_url, includes_list=[]):
         for url in ["{}/{}".format(parent_folder, uu) for uu in model["includes"]]:
             if url in includes_list:
                 pass
+            if url == '../jsons/recorders.json':
+                print("discluding", url)
+                pass # skip the recorders json file because it doesnt have any nodes or edges
             else:
+                print("including", url)
                 includes_list.append(url)
             search_includes(parent_file_url=url, includes_list=includes_list)
     return includes_list
@@ -98,5 +102,5 @@ for section_file in c:
         sectn.edges(current_edges)
         sectn.attr(label=section_name)       
 
-dot.format = 'svg'
-dot.render(directory='doctest-output').replace('\\', '/')
+dot.format = 'pdf'
+dot.render(directory='digraph-output').replace('\\', '/')

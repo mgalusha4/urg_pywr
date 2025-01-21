@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 
 folder = "../jsons"
 filename = "model.json"
+# filename = "irrigation_district_template.json"
+
 
 with open("{}/{}".format(folder, filename)) as f:
     model = json.load(f)

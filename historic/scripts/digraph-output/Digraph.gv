@@ -2,7 +2,8 @@
 digraph {
 	subgraph model {
 		model_outlet [color=red fontcolor=white shape=ellipse style=filled]
-		URG1_TAOS_return_flow -> model_outlet
+		URG2_EMB_return_flow -> model_outlet
+		embudo_gauge -> model_outlet
 		label=model
 	}
 	subgraph upper_rgb {
@@ -13,12 +14,23 @@ digraph {
 		URG1_TAOS_irrigation_loss [color=red fontcolor=white shape=ellipse style=filled]
 		URG1_TAOS_irrigation [color=red fontcolor=white shape=ellipse style=filled]
 		URG1_TAOS_return_flow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		embudo_gauge [color=hotpink fontcolor=white shape=rectangle style=filled]
+		URG2_EMB_diversion_point [color=hotpink fontcolor=white shape=rectangle style=filled]
+		URG2_EMB_irrigation_loss [color=red fontcolor=white shape=ellipse style=filled]
+		URG2_EMB_irrigation [color=red fontcolor=white shape=ellipse style=filled]
+		URG2_EMB_return_flow [color=hotpink fontcolor=white shape=rectangle style=filled]
 		lobatos_gauge_inflow -> cerro_gauge
 		rio_pueblo_taos_inflow -> cerro_gauge
 		cerro_gauge -> URG1_TAOS_diversion_point
 		URG1_TAOS_diversion_point -> URG1_TAOS_irrigation
 		URG1_TAOS_diversion_point -> URG1_TAOS_irrigation_loss
 		URG1_TAOS_diversion_point -> URG1_TAOS_return_flow
+		URG1_TAOS_return_flow -> embudo_gauge
+		cerro_gauge -> embudo_gauge
+		embudo_gauge -> URG2_EMB_diversion_point
+		URG2_EMB_diversion_point -> URG2_EMB_irrigation
+		URG2_EMB_diversion_point -> URG2_EMB_irrigation_loss
+		URG2_EMB_diversion_point -> URG2_EMB_return_flow
 		label=upper_rgb
 	}
 }

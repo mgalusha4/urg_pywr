@@ -1,0 +1,865 @@
+{
+    "nodes": [
+        {
+            "name": "cochiti_inflow",
+            "type": "piecewiselink",
+            "comment": "10,000cfs max at the confluence with the Rio Grande stem from Lobatos",
+            "nsteps": 2,
+            "max_flows": [
+                19830,
+                null
+            ],
+            "costs": [
+                0,
+                1000000
+            ]
+        },
+        {
+            "name": "cochiti_reservoir",
+            "type": "storage",
+            "max_volume": 589200,
+            "min_volume": 0,
+            "cost": "cost_cochiti_storage"
+        },
+        {
+            "name": "cochiti_pet",
+            "type": "output",
+            "max_flow": "pet_over_cochiti_sim",
+            "cost": "cost_cochiti_pet"
+        },
+        {
+            "name": "cochiti_precip",
+            "type": "input",
+            "max_flow": "precip_over_cochiti",
+            "min_flow": "precip_over_cochiti"
+        },
+        {
+            "name": "cochiti_release",
+            "type": "piecewiselink",
+            "comment": "6000cfs ish",
+            "nsteps": 2,
+            "max_flows": [
+                2000,
+                12000
+            ],
+            "costs": [
+                0,
+                1000
+            ]
+        },
+        {
+            "name": "cochiti_spill",
+            "type": "link",
+            "cost": 10000
+        },
+        {
+            "name": "rio_nambe_inflow",
+            "type": "input",
+            "max_flow": "flow_rio_nambe",
+            "min_flow": "flow_rio_nambe"
+        },
+        {
+            "name": "rio_grande_belowcochiti",
+            "type": "link",
+            "min_flow": 200
+        },
+        {
+            "name": "rio_grande_sanfelipe",
+            "type": "link"
+        },
+        {
+            "name": "COCDV_diversion_point",
+            "type": "link",
+            "max_flow": "COCDV_diversion_sim",
+            "cost": -1050
+        },
+        {
+            "name": "COCDV_irrigation_loss",
+            "type": "output",
+            "max_flow": "COCDV_irrigation_loss_sim",
+            "cost": -50
+        },
+        {
+            "name": "COCDV_irrigation",
+            "type": "output",
+            "max_flow": "COCDV_irrigation_sim",
+            "cost": -60
+        },
+        {
+            "name": "COCDV_return_flow",
+            "type": "link",
+            "max_flow": "COCDV_return_flow_sim"
+        },
+        {
+            "name": "angostura_diversion",
+            "type": "link"
+        },
+        {
+          "name": "rio_jemez_inflow",
+          "type": "input",
+          "max_flow": "flow_jemez_sim",
+          "min_flow": "flow_jemez_sim"
+        },
+        {
+            "name": "ANGDV_diversion_point",
+            "type": "link",
+            "max_flow": "ANGDV_diversion_sim",
+            "cost": -1050
+        },
+        {
+            "name": "ANGDV_irrigation_loss",
+            "type": "output",
+            "max_flow": "ANGDV_irrigation_loss_sim",
+            "cost": -40
+        },
+        {
+            "name": "ANGDV_irrigation",
+            "type": "output",
+            "max_flow": "ANGDV_irrigation_sim",
+            "cost": -50
+        },
+        {
+            "name": "ANGDV_return_flow",
+            "type": "link",
+            "max_flow": "ANGDV_return_flow_sim"
+        },
+        {
+          "name": "rio_grande_albuquerque",
+          "type": "link"
+        },
+        {
+          "name": "rio_grande_isleta",
+          "type": "link"
+        },
+        {
+          "name": "isleta_dam_inflow",
+          "type": "link"
+        },
+        {
+            "name": "isleta_dam",
+            "type": "link"
+        },
+        {
+          "name": "ABCWA_municipal",
+          "type": "output",
+          "max_flow": "municipal_demand_ABCWA_sim",
+          "cost": -3000
+        },
+        {
+          "name": "ABCWA_municipal_return",
+          "type": "input",
+          "max_flow": "ABCWA_return_flow_sim",
+          "min_flow": "ABCWA_return_flow_sim"
+        },
+        {
+          "name": "rio_grande_bosquefarms",
+          "type": "link"
+        },
+        {
+          "name": "rio_grande_highway346",
+          "type": "link"
+        },
+        {
+          "name": "san_acacia_dam_inflow",
+          "type": "link"
+        },
+        {
+            "name": "ISLDV_diversion_point",
+            "type": "link",
+            "max_flow": "ISLDV_diversion_sim",
+            "cost": -1050
+        },
+        {
+            "name": "ISLDV_irrigation_loss",
+            "type": "output",
+            "max_flow": "ISLDV_irrigation_loss_sim",
+            "cost": -30
+        },
+        {
+            "name": "ISLDV_irrigation",
+            "type": "output",
+            "max_flow": "ISLDV_irrigation_sim",
+            "cost": -40
+        },
+        {
+            "name": "ISLDV_return_flow",
+            "type": "link",
+            "max_flow": "ISLDV_return_flow_sim"
+        },
+        {
+          "name": "rio_puerco_inflow",
+          "type": "input",
+          "max_flow": "flow_rio_puerco_sim",
+          "min_flow": "flow_rio_puerco_sim"
+        },
+        {
+            "name": "san_acacia_dam",
+            "type": "link"
+        },
+        {
+            "name": "san_acacia_dam_to_rg",
+            "type": "link"
+        },
+        {
+            "name": "rio_grande_sanacacia",
+            "type": "link",
+            "min_flow": "minnow_flows_sanacacia"
+        },
+        {
+            "name": "SNADV_diversion_point",
+            "type": "link",
+            "max_flow": "SNADV_diversion_sim",
+            "cost": -1050
+        },
+        {
+            "name": "SNADV_irrigation_loss",
+            "type": "output",
+            "max_flow": "SNADV_irrigation_loss_sim",
+            "cost": -20
+        },
+        {
+            "name": "SNADV_irrigation",
+            "type": "output",
+            "max_flow": "SNADV_irrigation_sim",
+            "cost": -30
+        },
+        {
+            "name": "SNADV_return_flow",
+            "type": "link",
+            "max_flow": "SNADV_return_flow_sim"
+        },
+        {
+            "name": "low_flow_conveyance_channel",
+            "type": "link"
+        },
+        {
+            "name": "lfcc_san_acacia",
+            "type": "link"
+        },
+        {
+            "name": "lfcc_san_marcial",
+            "type": "output",
+            "max_flow": {
+                "type": "aggregated",
+                "agg_func": "product",
+                "parameters": [
+                    "LFCC_prediction_sim",
+                    1.983
+                ]
+            },
+            "cost": -400
+        },
+        {
+            "name": "NWR_return_flow",
+            "type": "input",
+            "max_flow": "returnflow_NWR_sim",
+            "min_flow": "returnflow_NWR_sim",
+            "comment": "flows back into the NWR -> National Wildlife Refuge (Bosque del Apache)"
+        },
+        {
+            "name": "rio_grande_sanmarcial",
+            "type": "link"
+        },
+        {
+            "name": "san_marcial_gauge",
+            "type": "link"
+        },
+        {
+            "name": "elephant_butte_inflow",
+            "type": "link"
+        }
+    ],
+    "edges": [
+        ["embudo_gauge", "cochiti_inflow"],
+
+        ["URG2_EMB_return_flow", "cochiti_inflow"],
+
+        ["rio_nambe_inflow", "cochiti_inflow"],
+
+        ["cochiti_inflow", "cochiti_reservoir"],
+
+        ["cochiti_precip", "cochiti_reservoir"],
+
+        ["cochiti_reservoir", "cochiti_pet"],
+
+        ["cochiti_reservoir", "cochiti_spill"],
+
+        ["cochiti_reservoir", "cochiti_release"],
+
+        ["cochiti_release", "rio_grande_belowcochiti"],
+
+        ["cochiti_spill", "rio_grande_belowcochiti"],
+
+        ["rio_grande_belowcochiti", "rio_grande_sanfelipe"],
+
+        ["rio_grande_sanfelipe", "angostura_diversion"],
+
+        ["rio_grande_belowcochiti","COCDV_diversion_point" ],
+
+        ["COCDV_diversion_point","COCDV_irrigation"],
+
+        [ "COCDV_diversion_point","COCDV_irrigation_loss"],
+
+        [ "COCDV_diversion_point","COCDV_return_flow"],   
+
+        ["COCDV_return_flow","angostura_diversion"],
+
+        ["rio_jemez_inflow", "angostura_diversion"],
+
+        ["angostura_diversion","ANGDV_diversion_point" ],
+
+        ["ANGDV_diversion_point","ANGDV_irrigation"],
+
+        [ "ANGDV_diversion_point","ANGDV_irrigation_loss"],
+
+        [ "ANGDV_diversion_point","ANGDV_return_flow"], 
+        
+        ["ANGDV_return_flow", "isleta_dam_inflow"],
+
+        ["angostura_diversion","rio_grande_albuquerque"],
+
+        ["rio_grande_albuquerque", "rio_grande_isleta"],
+
+        ["rio_grande_isleta", "isleta_dam_inflow"],
+
+        ["isleta_dam_inflow", "isleta_dam"],
+
+        ["rio_grande_albuquerque", "ABCWA_municipal"],
+
+        ["ABCWA_municipal_return", "rio_grande_isleta"],
+
+        ["isleta_dam", "rio_grande_bosquefarms"],
+
+        ["rio_grande_bosquefarms", "rio_grande_highway346"],
+
+        ["rio_grande_highway346", "san_acacia_dam_inflow"],
+
+        ["isleta_dam", "ISLDV_diversion_point" ],
+
+        ["ISLDV_diversion_point","ISLDV_irrigation"],
+
+        [ "ISLDV_diversion_point","ISLDV_irrigation_loss"],
+
+        [ "ISLDV_diversion_point","ISLDV_return_flow"],   
+
+        ["ISLDV_return_flow","san_acacia_dam_inflow"],
+
+        ["rio_puerco_inflow", "san_acacia_dam_inflow"],
+
+        ["san_acacia_dam_inflow", "san_acacia_dam"],
+
+        ["san_acacia_dam", "san_acacia_dam_to_rg"],
+
+        ["san_acacia_dam_to_rg", "rio_grande_sanacacia"],
+
+        ["san_acacia_dam","SNADV_diversion_point" ],
+
+        ["SNADV_diversion_point","SNADV_irrigation"],
+
+        [ "SNADV_diversion_point","SNADV_irrigation_loss"],
+
+        [ "SNADV_diversion_point","SNADV_return_flow"],   
+
+        ["SNADV_return_flow","rio_grande_sanacacia"],
+
+        ["san_acacia_dam", "low_flow_conveyance_channel"],
+
+        ["low_flow_conveyance_channel", "lfcc_san_acacia"],
+
+        ["lfcc_san_acacia", "lfcc_san_marcial"],
+
+        ["NWR_return_flow", "rio_grande_sanacacia"],
+
+        ["rio_grande_sanacacia", "rio_grande_sanmarcial"],
+
+        ["rio_grande_sanmarcial", "san_marcial_gauge"],
+
+        ["san_marcial_gauge", "elephant_butte_inflow"]
+
+    ],
+    "parameters": {
+        "cost_cochiti_storage": {
+            "type": "controlcurveinterpolated",
+            "storage_node": "cochiti_reservoir",
+            "control_curves": [
+                0.1,
+                0.075
+            ],
+            "values": [
+                1001,
+                1000,
+                -1000,
+                -100
+            ]
+        },
+        "pet_over_cochiti_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "pet_over_cochiti_mm",
+                "cochiti_area_acre",
+                0.00328084
+            ],
+            "comment": "convert mm to ft"
+        },
+        "pet_over_cochiti_mm": {
+            "type": "dataframe",
+            "url": "../input/reservoirs/cochiti/pet_mm.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "pet"
+        },
+        "cochiti_area_acre": {
+            "type": "VolumeAreaCurve",
+            "url": [
+                "../input/reservoirs",
+                "cochiti"
+            ],
+            "factor": 1
+        },
+        "cost_cochiti_pet": {
+            "type": "constant",
+            "url": "../input/reservoirs/reservoirs_cost.csv",
+            "index_col": "Reservoir",
+            "index": "cochiti",
+            "column": "PETCost"
+        },
+        "precip_over_cochiti": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "precip_over_cochiti_mm",
+                0.00328084,
+                "cochiti_area_acre"
+            ],
+            "comment": "convert mm to ft"
+        },
+        "precip_over_cochiti_mm": {
+            "type": "dataframe",
+            "url": "../input/reservoirs/cochiti/precip_mm.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "precip"
+        },
+        "flow_rio_nambe": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "flow_rio_nambe_cfsd",
+                1.983
+            ],
+            "comment": "1.5 multiplier removed, 1.983 conversion to ac-ft"
+        },
+        "flow_rio_nambe_cfsd": {
+            "type": "dataframe",
+            "url": "../input/obs_streamflow/obs_streamflow.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "rio_nambe"
+        },
+        "COCDV_diversion_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "COCDV_diversion_calibration",
+                "irrigation_demand_COCDV_sim"
+            ]
+        },
+        "COCDV_diversion_calibration": {
+            "type": "constant",
+            "value": 2.01,
+            "comment": "correcting the aquacrop output to match observations"
+        },
+        "irrigation_demand_COCDV_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "COCDV_croprequirements_mm",
+                "COCDV_area_ac",
+                0.00328084
+            ],
+            "comment": "compute the value of KC*PET*AREA; constants to convert from mm to feet"
+        },
+        "COCDV_croprequirements_mm": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigation_requirements.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "COCDV"
+        },
+        "COCDV_area_ac": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigated_areas_historical.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "COCDV"
+        },
+        "COCDV_irrigation_loss_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "COCDV_diversion_sim",
+                "COCDV_irr_not_crop_use",
+                "COCDV_irr_loss"
+            ]
+        },
+        "COCDV_irr_loss": {
+            "type": "constant",
+            "value": 0.21,
+            "comment": "this factor decides how much of the water not used by the plants is lost vs. return flow"
+        },
+        "COCDV_irr_not_loss": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "COCDV_irr_loss"}],
+            "comment": "the fraction that is not lost, take 1 minus the fraction that is lost"
+        },
+        "COCDV_irrigation_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "COCDV_diversion_sim",
+                "COCDV_irr_crop_use"
+            ]
+        },
+        "COCDV_irr_crop_use": {
+            "type": "constant",
+            "value": 0.44
+        },
+        "COCDV_irr_not_crop_use": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "COCDV_irr_crop_use"}],
+            "comment": "the fraction that is not used by the crops, what is not used by crops is split between loss & return"
+        },
+        "COCDV_return_flow_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "COCDV_diversion_sim",
+                "COCDV_irr_not_crop_use",
+                "COCDV_irr_not_loss"
+            ]
+        },
+        "flow_jemez_sim": {
+          "type": "aggregated",
+          "agg_func": "product",
+          "parameters": ["flow_jemez_cfsd", 1.983]
+        },
+        "flow_jemez_cfsd": {
+          "type": "dataframe",
+          "url": "../input/obs_streamflow/obs_streamflow.csv",
+          "index_col": "date",
+          "parse_dates": true,
+          "column": "rio_jemez"
+        },
+        "ANGDV_diversion_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "ANGDV_diversion_calibration",
+                "irrigation_demand_ANGDV_sim"
+            ]
+        },
+        "ANGDV_diversion_calibration": {
+            "type": "constant",
+            "value": 2.3,
+            "comment": "correcting the aquacrop output to match observations"
+        },
+        "irrigation_demand_ANGDV_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "ANGDV_croprequirements_mm",
+                "ANGDV_area_ac",
+                0.00328084
+            ],
+            "comment": "compute the value of KC*PET*AREA; constants to convert from mm to feet"
+        },
+        "ANGDV_croprequirements_mm": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigation_requirements.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "ANGDV"
+        },
+        "ANGDV_area_ac": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigated_areas_historical.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "ANGDV"
+        },
+        "ANGDV_irrigation_loss_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "ANGDV_diversion_sim",
+                "ANGDV_irr_not_crop_use",
+                "ANGDV_irr_loss"
+            ]
+        },
+        "ANGDV_irr_loss": {
+            "type": "constant",
+            "value": 0.48,
+            "comment": "this factor decides how much of the water not used by the plants is lost vs. return flow"
+        },
+        "ANGDV_irr_not_loss": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "ANGDV_irr_loss"}],
+            "comment": "the fraction that is not lost, take 1 minus the fraction that is lost"
+        },
+        "ANGDV_irrigation_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "ANGDV_diversion_sim",
+                "ANGDV_irr_crop_use"
+            ]
+        },
+        "ANGDV_irr_crop_use": {
+            "type": "constant",
+            "value": 0.49
+        },
+        "ANGDV_irr_not_crop_use": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "ANGDV_irr_crop_use"}],
+            "comment": "the fraction that is not used by the crops, what is not used by crops is split between loss & return"
+        },
+        "ANGDV_return_flow_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "ANGDV_diversion_sim",
+                "ANGDV_irr_not_crop_use",
+                "ANGDV_irr_not_loss"
+            ]
+        },
+        "municipal_demand_ABCWA_sim": {
+          "type": "aggregated",
+          "agg_func": "product",
+          "parameters": ["ABCWA_demand_cfsd", 1.983]
+        },
+        "ABCWA_demand_cfsd": {
+          "type": "monthlyprofileparameter",
+          "values": [70, 70, 80, 130, 130, 130, 130, 130, 130, 130, 70, 70]
+        },
+        "ABCWA_return_flow_sim": {
+          "type": "aggregated",
+          "agg_func": "product",
+          "parameters": ["ABCWA_return_flow_cfsd", 1.983]
+        } ,
+        "ABCWA_return_flow_cfsd": {
+          "type" : "monthlyprofileparameter",
+          "values": [79.24, 79.28,  80.14, 80.99, 81.75, 82.45, 84.15, 85.7, 84.76, 83.98, 81.54, 80.57]
+        },
+        "ISLDV_diversion_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "ISLDV_diversion_calibration",
+                "irrigation_demand_ISLDV_sim"
+            ]
+        },
+        "ISLDV_diversion_calibration": {
+            "type": "constant",
+            "value": 1.5,
+            "comment": "correcting the aquacrop output to match observations"
+        },
+        "irrigation_demand_ISLDV_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "ISLDV_croprequirements_mm",
+                "ISLDV_area_ac",
+                0.00328084
+            ],
+            "comment": "compute the value of KC*PET*AREA; constants to convert from mm to feet"
+        },
+        "ISLDV_croprequirements_mm": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigation_requirements.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "ISLDV"
+        },
+        "ISLDV_area_ac": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigated_areas_historical.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "ISLDV"
+        },
+        "ISLDV_irrigation_loss_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "ISLDV_diversion_sim",
+                "ISLDV_irr_not_crop_use",
+                "ISLDV_irr_loss"
+            ]
+        },
+        "ISLDV_irr_loss": {
+            "type": "constant",
+            "value": 0.43,
+            "comment": "this factor decides how much of the water not used by the plants is lost vs. return flow"
+        },
+        "ISLDV_irr_not_loss": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "ISLDV_irr_loss"}],
+            "comment": "the fraction that is not lost, take 1 minus the fraction that is lost"
+        },
+        "ISLDV_irrigation_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "ISLDV_diversion_sim",
+                "ISLDV_irr_crop_use"
+            ]
+        },
+        "ISLDV_irr_crop_use": {
+            "type": "constant",
+            "value": 0.51
+        },
+        "ISLDV_irr_not_crop_use": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "ISLDV_irr_crop_use"}],
+            "comment": "the fraction that is not used by the crops, what is not used by crops is split between loss & return"
+        },
+        "ISLDV_return_flow_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "ISLDV_diversion_sim",
+                "ISLDV_irr_not_crop_use",
+                "ISLDV_irr_not_loss"
+            ]
+        },  
+        "flow_rio_puerco_sim": {
+          "type": "aggregated",
+          "agg_func": "product",
+          "parameters": ["flow_rio_puerco_cfsd", 1.983]
+        },
+        "flow_rio_puerco_cfsd": {
+          "type": "dataframe",
+          "url": "../input/obs_streamflow/obs_streamflow.csv",
+          "index_col": "date",
+          "parse_dates": true,
+          "column": "rio_puerco"
+        },
+        "minnow_flows_sanacacia": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                1.983,
+                "target_flows_sanacacia",
+                "minnow_factor"
+            ]
+        },
+        "target_flows_sanacacia": {
+            "type": "constant",
+            "value": 50
+        },
+        "minnow_factor": {
+            "type": "constant",
+            "value": 0.0
+        },
+        "SNADV_diversion_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "SNADV_diversion_calibration",
+                "irrigation_demand_SNADV_sim"
+            ]
+        },
+        "SNADV_diversion_calibration": {
+            "type": "constant",
+            "value": 0.3,
+            "comment": "correcting the aquacrop output to match observations"
+        },
+        "irrigation_demand_SNADV_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "SNADV_croprequirements_mm",
+                "SNADV_area_ac",
+                0.00328084
+            ],
+            "comment": "compute the value of KC*PET*AREA; constants to convert from mm to feet"
+        },
+        "SNADV_croprequirements_mm": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigation_requirements.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "SNADV"
+        },
+        "SNADV_area_ac": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigated_areas_historical.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "SNADV"
+        },
+        "SNADV_irrigation_loss_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "SNADV_diversion_sim",
+                "SNADV_irr_not_crop_use",
+                "SNADV_irr_loss"
+            ]
+        },
+        "SNADV_irr_loss": {
+            "type": "constant",
+            "value": 0.1,
+            "comment": "this factor decides how much of the water not used by the plants is lost vs. return flow"
+        },
+        "SNADV_irr_not_loss": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "SNADV_irr_loss"}],
+            "comment": "the fraction that is not lost, take 1 minus the fraction that is lost"
+        },
+        "SNADV_irrigation_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "SNADV_diversion_sim",
+                "SNADV_irr_crop_use"
+            ]
+        },
+        "SNADV_irr_crop_use": {
+            "type": "constant",
+            "value": 0.7
+        },
+        "SNADV_irr_not_crop_use": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "SNADV_irr_crop_use"}],
+            "comment": "the fraction that is not used by the crops, what is not used by crops is split between loss & return"
+        },
+        "SNADV_return_flow_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "SNADV_diversion_sim",
+                "SNADV_irr_not_crop_use",
+                "SNADV_irr_not_loss"
+            ]
+        },
+        "LFCC_prediction_sim": {
+            "type": "LFCCSimulation",
+            "url": {
+                "folder": "../input/lfcc_model"
+            }
+        },
+        "returnflow_NWR_sim": {
+            "type": "ReturnFlowNWR"
+        }
+    }
+}

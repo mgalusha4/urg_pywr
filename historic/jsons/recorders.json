@@ -1,5 +1,156 @@
 {
     "recorders": {
-        "lobatos_gauge_inflow": {
-            "type":
+        "URG1_TAOS_DIVERSION": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "URG1_TAOS_diversion_point"
+        },
+        "URG2_EMB_DIVERSION": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "URG2_EMB_diversion_point"
+        },
+        "CERRO_GAUGE": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "cerro_gauge"
+        },
+        "EMBUDO_GAUGE": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "embudo_gauge"
+        },
+        "WILLOW_CREEK": { 
+            "type": "NumpyArrayNodeRecorder",
+            "node": "willow_creek_inflow"
+        },
+        "AZOTEA_TUNNEL": { 
+            "type": "NumpyArrayNodeRecorder",
+            "node": "azotea_tunnel_inflow"
+        },
+        "HERON_STORAGE": {
+            "type": "NumpyArrayStorageRecorder",
+            "node": "heron_reservoir"
+        },
+        "HERON_RELEASE": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "heron_release"
+        },
+        "ELVADO_STORAGE": {
+            "type": "NumpyArrayStorageRecorder",
+            "node": "el_vado_reservoir"
+        },
+        "ELVADO_RELEASE": {
+            "type": "NumpyArraynODERecorder",
+            "node": "el_vado_release"
+        },
+        "ABIQUIU_STORAGE": {
+            "type": "NumpyArrayStorageRecorder",
+            "node": "abiquiu_reservoir"
+        },
+        "ABIQUIU_RELEASE": {
+            "type": "NumpyArraynODERecorder",
+            "node": "abiquiu_release"
+        },
+        "COCHITI_STORAGE": {
+            "type": "NumpyArrayStorageRecorder",
+            "node": "cochiti_reservoir"
+        },
+        "COCHITI_RELEASE": {
+            "type": "NumpyArraynODERecorder",
+            "node": "cochiti_release"
+        },
+        "BELOW_COCHITI": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "rio_grande_belowcochiti"
+        },
+        "SANFELIPE": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "rio_grande_sanfelipe"
+        },
+        "COCDV_DIV": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "COCDV_diversion_point"
+        },
+        "COCDV_RETURN": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "COCDV_return_flow"
+        },
+        "ANGDV_DIV": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "ANGDV_diversion_point"
+        },
+        "RG_ALB_GAUGE": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "rio_grande_albuquerque"
+        },
+        "ABCWA_MUNICIPAL": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "ABCWA_municipal"
+        },
+        "ABCWA_MUNICIPAL_RET": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "ABCWA_municipal_return"
+        },
+        "ISLDV_RETURN": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "ISLDV_return_flow"
+        },
+        "ISLDV_DIV": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "ISLDV_diversion_point"
+        },
+        "SNADV_RETURN": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "SNADV_return_flow"
+        },
+        "SNADV_DIV": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "SNADV_diversion_point"
+        },
+        "LFCC_SANACACIA": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "lfcc_san_acacia"
+        },
+        "RG_FLOOD_SANACACIA": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "rio_grande_sanacacia"
+        },
+        "RG_FLOOD_SANMARCIAL": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "rio_grande_sanmarcial"
+        },
+        "ELEPHANT_BUTTE_STORAGE": {
+            "type": "NumpyArrayStorageRecorder",
+            "node": "elephant_butte_reservoir"
+        },
+        "ELEPHANT_BUTTE_RELEASE": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "elephant_butte_release"
+        },
+        "CABALLO_RELEASE": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "caballo_release"
+        },
+        "CABALLO_STORAGE": {
+            "type": "NumpyArrayStorageRecorder",
+            "node": "caballo_reservoir"
+        },
+        "BELOW_CABALLO": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "caballo_outflow"
+        },
+        "RG_ELPASO": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "rg_elpaso"
+        },
+        "RG_FORT_QUITMAN": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "rg_fort_quitman"
+        },
+        "EBID_DIV": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "EBID_diversion_point"
+        },
+        "EPID_DIV": {
+            "type": "NumpyArrayNodeRecorder",
+            "node": "EPID_diversion_point"
         }
+    }
+}

@@ -2,8 +2,7 @@
 digraph {
 	subgraph model {
 		model_outlet [color=red fontcolor=white shape=ellipse style=filled]
-		URG2_EMB_return_flow -> model_outlet
-		embudo_gauge -> model_outlet
+		rg_fort_quitman -> model_outlet
 		label=model
 	}
 	subgraph upper_rgb {
@@ -32,5 +31,239 @@ digraph {
 		URG2_EMB_diversion_point -> URG2_EMB_irrigation_loss
 		URG2_EMB_diversion_point -> URG2_EMB_return_flow
 		label=upper_rgb
+	}
+	subgraph sanjuan_chama {
+		willow_creek_inflow [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		azotea_tunnel_inflow [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		heron_inflow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		heron_reservoir [color=navy fontcolor=white shape=ellipse style=filled]
+		heron_release [color=hotpink fontcolor=white shape=rectangle style=filled]
+		heron_spill [color=hotpink fontcolor=white shape=rectangle style=filled]
+		heron_outflow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		heron_pet [color=red fontcolor=white shape=ellipse style=filled]
+		heron_precip [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		rio_chama_puente_inflow [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		el_vado_inflow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		el_vado_reservoir [color=navy fontcolor=white shape=ellipse style=filled]
+		el_vado_release [color=hotpink fontcolor=white shape=rectangle style=filled]
+		el_vado_spill [color=hotpink fontcolor=white shape=rectangle style=filled]
+		el_vado_outflow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		el_vado_pet [color=red fontcolor=white shape=ellipse style=filled]
+		el_vado_precip [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		abiquiu_reach_sideflows_inflow [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		abiquiu_inflow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		abiquiu_reservoir [color=navy fontcolor=white shape=ellipse style=filled]
+		abiquiu_pet [color=red fontcolor=white shape=ellipse style=filled]
+		abiquiu_precip [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		abiquiu_release [color=hotpink fontcolor=white shape=rectangle style=filled]
+		abiquiu_spill [color=hotpink fontcolor=white shape=rectangle style=filled]
+		chamita_reach_sideflows_inflow [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		abiquiu_outflow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		UPPERCHAMA_diversion_point [color=hotpink fontcolor=white shape=rectangle style=filled]
+		UPPERCHAMA_irrigation_loss [color=red fontcolor=white shape=ellipse style=filled]
+		UPPERCHAMA_irrigation [color=red fontcolor=white shape=ellipse style=filled]
+		UPPERCHAMA_return_flow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		LOWERCHAMA_diversion_point [color=hotpink fontcolor=white shape=rectangle style=filled]
+		LOWERCHAMA_irrigation_loss [color=red fontcolor=white shape=ellipse style=filled]
+		LOWERCHAMA_irrigation [color=red fontcolor=white shape=ellipse style=filled]
+		LOWERCHAMA_return_flow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		willow_creek_inflow -> heron_inflow
+		azotea_tunnel_inflow -> heron_inflow
+		heron_inflow -> heron_reservoir
+		heron_reservoir -> heron_release
+		heron_reservoir -> heron_spill
+		heron_release -> heron_outflow
+		heron_spill -> heron_outflow
+		heron_outflow -> el_vado_inflow
+		heron_reservoir -> heron_pet
+		heron_precip -> heron_reservoir
+		el_vado_inflow -> el_vado_reservoir
+		el_vado_reservoir -> el_vado_release
+		el_vado_reservoir -> el_vado_spill
+		el_vado_release -> el_vado_outflow
+		el_vado_spill -> el_vado_outflow
+		el_vado_outflow -> abiquiu_inflow
+		el_vado_reservoir -> el_vado_pet
+		el_vado_precip -> el_vado_reservoir
+		rio_chama_puente_inflow -> el_vado_inflow
+		abiquiu_reach_sideflows_inflow -> abiquiu_inflow
+		abiquiu_inflow -> abiquiu_reservoir
+		abiquiu_precip -> abiquiu_reservoir
+		abiquiu_reservoir -> abiquiu_release
+		abiquiu_reservoir -> abiquiu_spill
+		abiquiu_reservoir -> abiquiu_pet
+		abiquiu_spill -> abiquiu_outflow
+		abiquiu_release -> abiquiu_outflow
+		chamita_reach_sideflows_inflow -> abiquiu_outflow
+		abiquiu_outflow -> cochiti_inflow
+		el_vado_outflow -> UPPERCHAMA_diversion_point
+		UPPERCHAMA_diversion_point -> UPPERCHAMA_irrigation
+		UPPERCHAMA_diversion_point -> UPPERCHAMA_irrigation_loss
+		UPPERCHAMA_diversion_point -> UPPERCHAMA_return_flow
+		UPPERCHAMA_return_flow -> abiquiu_inflow
+		abiquiu_release -> LOWERCHAMA_diversion_point
+		LOWERCHAMA_diversion_point -> LOWERCHAMA_irrigation
+		LOWERCHAMA_diversion_point -> LOWERCHAMA_irrigation_loss
+		LOWERCHAMA_diversion_point -> LOWERCHAMA_return_flow
+		LOWERCHAMA_return_flow -> abiquiu_outflow
+		label=sanjuan_chama
+	}
+	subgraph mrgcd {
+		cochiti_inflow [color=orange fontcolor=white shape=rectangle style=filled]
+		cochiti_reservoir [color=navy fontcolor=white shape=ellipse style=filled]
+		cochiti_pet [color=red fontcolor=white shape=ellipse style=filled]
+		cochiti_precip [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		cochiti_release [color=orange fontcolor=white shape=rectangle style=filled]
+		cochiti_spill [color=hotpink fontcolor=white shape=rectangle style=filled]
+		rio_nambe_inflow [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		rio_grande_belowcochiti [color=hotpink fontcolor=white shape=rectangle style=filled]
+		rio_grande_sanfelipe [color=hotpink fontcolor=white shape=rectangle style=filled]
+		COCDV_diversion_point [color=hotpink fontcolor=white shape=rectangle style=filled]
+		COCDV_irrigation_loss [color=red fontcolor=white shape=ellipse style=filled]
+		COCDV_irrigation [color=red fontcolor=white shape=ellipse style=filled]
+		COCDV_return_flow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		angostura_diversion [color=hotpink fontcolor=white shape=rectangle style=filled]
+		rio_jemez_inflow [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		ANGDV_diversion_point [color=hotpink fontcolor=white shape=rectangle style=filled]
+		ANGDV_irrigation_loss [color=red fontcolor=white shape=ellipse style=filled]
+		ANGDV_irrigation [color=red fontcolor=white shape=ellipse style=filled]
+		ANGDV_return_flow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		rio_grande_albuquerque [color=hotpink fontcolor=white shape=rectangle style=filled]
+		rio_grande_isleta [color=hotpink fontcolor=white shape=rectangle style=filled]
+		isleta_dam_inflow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		isleta_dam [color=hotpink fontcolor=white shape=rectangle style=filled]
+		ABCWA_municipal [color=red fontcolor=white shape=ellipse style=filled]
+		ABCWA_municipal_return [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		rio_grande_bosquefarms [color=hotpink fontcolor=white shape=rectangle style=filled]
+		rio_grande_highway346 [color=hotpink fontcolor=white shape=rectangle style=filled]
+		san_acacia_dam_inflow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		ISLDV_diversion_point [color=hotpink fontcolor=white shape=rectangle style=filled]
+		ISLDV_irrigation_loss [color=red fontcolor=white shape=ellipse style=filled]
+		ISLDV_irrigation [color=red fontcolor=white shape=ellipse style=filled]
+		ISLDV_return_flow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		rio_puerco_inflow [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		san_acacia_dam [color=hotpink fontcolor=white shape=rectangle style=filled]
+		san_acacia_dam_to_rg [color=hotpink fontcolor=white shape=rectangle style=filled]
+		rio_grande_sanacacia [color=hotpink fontcolor=white shape=rectangle style=filled]
+		SNADV_diversion_point [color=hotpink fontcolor=white shape=rectangle style=filled]
+		SNADV_irrigation_loss [color=red fontcolor=white shape=ellipse style=filled]
+		SNADV_irrigation [color=red fontcolor=white shape=ellipse style=filled]
+		SNADV_return_flow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		low_flow_conveyance_channel [color=hotpink fontcolor=white shape=rectangle style=filled]
+		lfcc_san_acacia [color=hotpink fontcolor=white shape=rectangle style=filled]
+		lfcc_san_marcial [color=red fontcolor=white shape=ellipse style=filled]
+		NWR_return_flow [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		rio_grande_sanmarcial [color=hotpink fontcolor=white shape=rectangle style=filled]
+		san_marcial_gauge [color=hotpink fontcolor=white shape=rectangle style=filled]
+		elephant_butte_inflow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		embudo_gauge -> cochiti_inflow
+		URG2_EMB_return_flow -> cochiti_inflow
+		rio_nambe_inflow -> cochiti_inflow
+		cochiti_inflow -> cochiti_reservoir
+		cochiti_precip -> cochiti_reservoir
+		cochiti_reservoir -> cochiti_pet
+		cochiti_reservoir -> cochiti_spill
+		cochiti_reservoir -> cochiti_release
+		cochiti_release -> rio_grande_belowcochiti
+		cochiti_spill -> rio_grande_belowcochiti
+		rio_grande_belowcochiti -> rio_grande_sanfelipe
+		rio_grande_sanfelipe -> angostura_diversion
+		rio_grande_belowcochiti -> COCDV_diversion_point
+		COCDV_diversion_point -> COCDV_irrigation
+		COCDV_diversion_point -> COCDV_irrigation_loss
+		COCDV_diversion_point -> COCDV_return_flow
+		COCDV_return_flow -> angostura_diversion
+		rio_jemez_inflow -> angostura_diversion
+		angostura_diversion -> ANGDV_diversion_point
+		ANGDV_diversion_point -> ANGDV_irrigation
+		ANGDV_diversion_point -> ANGDV_irrigation_loss
+		ANGDV_diversion_point -> ANGDV_return_flow
+		ANGDV_return_flow -> isleta_dam_inflow
+		angostura_diversion -> rio_grande_albuquerque
+		rio_grande_albuquerque -> rio_grande_isleta
+		rio_grande_isleta -> isleta_dam_inflow
+		isleta_dam_inflow -> isleta_dam
+		rio_grande_albuquerque -> ABCWA_municipal
+		ABCWA_municipal_return -> rio_grande_isleta
+		isleta_dam -> rio_grande_bosquefarms
+		rio_grande_bosquefarms -> rio_grande_highway346
+		rio_grande_highway346 -> san_acacia_dam_inflow
+		isleta_dam -> ISLDV_diversion_point
+		ISLDV_diversion_point -> ISLDV_irrigation
+		ISLDV_diversion_point -> ISLDV_irrigation_loss
+		ISLDV_diversion_point -> ISLDV_return_flow
+		ISLDV_return_flow -> san_acacia_dam_inflow
+		rio_puerco_inflow -> san_acacia_dam_inflow
+		san_acacia_dam_inflow -> san_acacia_dam
+		san_acacia_dam -> san_acacia_dam_to_rg
+		san_acacia_dam_to_rg -> rio_grande_sanacacia
+		san_acacia_dam -> SNADV_diversion_point
+		SNADV_diversion_point -> SNADV_irrigation
+		SNADV_diversion_point -> SNADV_irrigation_loss
+		SNADV_diversion_point -> SNADV_return_flow
+		SNADV_return_flow -> rio_grande_sanacacia
+		san_acacia_dam -> low_flow_conveyance_channel
+		low_flow_conveyance_channel -> lfcc_san_acacia
+		lfcc_san_acacia -> lfcc_san_marcial
+		NWR_return_flow -> rio_grande_sanacacia
+		rio_grande_sanacacia -> rio_grande_sanmarcial
+		rio_grande_sanmarcial -> san_marcial_gauge
+		san_marcial_gauge -> elephant_butte_inflow
+		label=mrgcd
+	}
+	subgraph texas {
+		elephant_butte_reservoir [color=navy fontcolor=white shape=ellipse style=filled]
+		elephant_butte_pet [color=red fontcolor=white shape=ellipse style=filled]
+		elephant_butte_precip [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		elephant_butte_release [color=hotpink fontcolor=white shape=rectangle style=filled]
+		elephant_butte_spill [color=hotpink fontcolor=white shape=rectangle style=filled]
+		elephant_butte_outflow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		eb_gauge [color=hotpink fontcolor=white shape=rectangle style=filled]
+		caballo_inflow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		caballo_reservoir [color=navy fontcolor=white shape=ellipse style=filled]
+		caballo_pet [color=red fontcolor=white shape=ellipse style=filled]
+		caballo_precip [color=deepskyblue fontcolor=white shape=ellipse style=filled]
+		caballo_release [color=hotpink fontcolor=white shape=rectangle style=filled]
+		caballo_spill [color=hotpink fontcolor=white shape=rectangle style=filled]
+		caballo_outflow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		rg_elpaso [color=hotpink fontcolor=white shape=rectangle style=filled]
+		rg_fort_quitman [color=hotpink fontcolor=white shape=rectangle style=filled]
+		EBID_diversion_point [color=hotpink fontcolor=white shape=rectangle style=filled]
+		EBID_irrigation_loss [color=red fontcolor=white shape=ellipse style=filled]
+		EBID_irrigation [color=red fontcolor=white shape=ellipse style=filled]
+		EBID_return_flow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		EPID_diversion_point [color=hotpink fontcolor=white shape=rectangle style=filled]
+		EPID_irrigation_loss [color=red fontcolor=white shape=ellipse style=filled]
+		EPID_irrigation [color=red fontcolor=white shape=ellipse style=filled]
+		EPID_return_flow [color=hotpink fontcolor=white shape=rectangle style=filled]
+		elephant_butte_inflow -> elephant_butte_reservoir
+		elephant_butte_precip -> elephant_butte_reservoir
+		elephant_butte_reservoir -> elephant_butte_pet
+		elephant_butte_reservoir -> elephant_butte_release
+		elephant_butte_reservoir -> elephant_butte_spill
+		elephant_butte_release -> elephant_butte_outflow
+		elephant_butte_spill -> elephant_butte_outflow
+		elephant_butte_outflow -> eb_gauge
+		eb_gauge -> caballo_inflow
+		caballo_inflow -> caballo_reservoir
+		caballo_precip -> caballo_reservoir
+		caballo_reservoir -> caballo_pet
+		caballo_reservoir -> caballo_release
+		caballo_reservoir -> caballo_spill
+		caballo_release -> caballo_outflow
+		caballo_spill -> caballo_outflow
+		caballo_outflow -> rg_elpaso
+		rg_elpaso -> rg_fort_quitman
+		caballo_outflow -> EBID_diversion_point
+		EBID_diversion_point -> EBID_irrigation
+		EBID_diversion_point -> EBID_irrigation_loss
+		EBID_diversion_point -> EBID_return_flow
+		EBID_return_flow -> rg_elpaso
+		rg_elpaso -> EPID_diversion_point
+		EPID_diversion_point -> EPID_irrigation
+		EPID_diversion_point -> EPID_irrigation_loss
+		EPID_diversion_point -> EPID_return_flow
+		EPID_return_flow -> rg_fort_quitman
+		label=texas
 	}
 }

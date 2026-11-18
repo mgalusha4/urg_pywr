@@ -1,0 +1,784 @@
+{
+    "nodes": [
+        {
+            "name": "willow_creek_inflow",
+            "type": "input",
+            "min_flow": "flow_willow_creek_sim",
+            "max_flow": "flow_willow_creek_sim"
+        },
+        {
+            "name": "azotea_tunnel_inflow",
+            "type": "input",
+            "max_flow": "flow_azotea_tunnel_sim",
+            "min_flow": "flow_azotea_tunnel_sim"
+        },
+        {
+            "name": "heron_inflow",
+            "type": "link"
+        },
+        {
+            "name": "heron_reservoir",
+            "type": "storage",
+            "max_volume": 401300,
+            "min_volume": 0,
+            "cost": "cost_heron_storage"
+        },
+        {
+            "name": "heron_release",
+            "type": "link",
+            "comment": "600-ish cfs - estimated from obs releases",
+            "max_flow": 1200
+        },
+        {
+            "name": "heron_spill",
+            "type": "link",
+            "cost": 10000
+        },
+        {
+            "name": "heron_outflow",
+            "type": "link"
+        },
+        {
+            "name": "heron_pet",
+            "type": "output",
+            "max_flow": "pet_over_heron",
+            "cost": "cost_heron_pet"
+        },
+        {
+            "name": "heron_precip",
+            "type": "input",
+            "max_flow": "precip_over_heron",
+            "min_flow": "precip_over_heron"
+        }, 
+        {
+            "name": "rio_chama_puente_inflow",
+            "type": "input",
+            "max_flow": "flow_rio_chama_puente",
+            "min_flow": "flow_rio_chama_puente"
+        },
+        {
+            "name": "el_vado_inflow",
+            "type": "link"
+        },
+        {
+            "name": "el_vado_reservoir",
+            "type": "storage",
+            "max_volume": 195400,
+            "min_volume": 0,
+            "cost": "cost_el_vado_storage"
+        },
+        {
+            "name": "el_vado_release",
+            "type": "link",
+            "max_flow": "el_vado_max_release"
+        },
+        {
+            "name": "el_vado_spill",
+            "type": "link",
+            "cost": 10000
+        },
+        {
+            "name": "el_vado_outflow",
+            "type": "link"
+        },
+        {
+            "name": "el_vado_pet",
+            "type": "output",
+            "max_flow": "pet_over_el_vado",
+            "cost": "cost_el_vado_pet"
+        },
+        {
+            "name": "el_vado_precip",
+            "type": "input",
+            "max_flow": "precip_over_el_vado",
+            "min_flow": "precip_over_el_vado"
+        },
+        {
+            "name": "abiquiu_reach_sideflows_inflow",
+            "type": "input",
+            "max_flow": "flow_abiquiu_reach_sideflows",
+            "min_flow": "flow_abiquiu_reach_sideflows"
+        },
+        {
+            "name": "abiquiu_inflow",
+            "type": "link"
+        },
+        {
+            "name": "abiquiu_reservoir",
+            "type": "storage",
+            "max_volume": 1198500,
+            "min_volume": 0,
+            "cost": "cost_abiquiu_storage"
+        },
+        {
+            "name": "abiquiu_pet",
+            "type": "output",
+            "max_flow": "pet_over_abiquiu",
+            "cost": "cost_abiquiu_pet"
+        },
+        {
+            "name": "abiquiu_precip",
+            "type": "input",
+            "max_flow": "precip_over_abiquiu",
+            "min_flow": "precip_over_abiquiu"
+        },
+        {
+            "name": "abiquiu_release",
+            "type": "link",
+            "comment": "1,800 cfs",
+            "max_flow": 3570
+        },
+        {
+            "name": "abiquiu_spill",
+            "type": "link",
+            "cost": 10000
+        },
+        {
+            "name": "chamita_reach_sideflows_inflow",
+            "type": "input",
+            "max_flow": "flow_chamita_reach_sideflows",
+            "min_flow": "flow_chamita_reach_sideflows"
+        },
+        {
+            "name": "abiquiu_outflow",
+            "comment": "confluence with Rio Ojo Calliente. Max=3,000cfs",
+            "type": "link",
+            "max_flow": 5949
+        },
+        {
+            "name": "UPPERCHAMA_diversion_point",
+            "type": "link",
+            "max_flow": "UPPERCHAMA_diversion_sim",
+            "cost": -1050
+        },
+        {
+            "name": "UPPERCHAMA_irrigation_loss",
+            "type": "output",
+            "max_flow": "UPPERCHAMA_irrigation_loss_sim",
+            "cost": -150
+        },
+        {
+            "name": "UPPERCHAMA_irrigation",
+            "type": "output",
+            "max_flow": "UPPERCHAMA_irrigation_sim",
+            "cost": -140
+        },
+        {
+            "name": "UPPERCHAMA_return_flow",
+            "type": "link",
+            "max_flow": "UPPERCHAMA_return_flow_sim"
+        },
+        {
+            "name": "LOWERCHAMA_diversion_point",
+            "type": "link",
+            "max_flow": "LOWERCHAMA_diversion_sim",
+            "cost": -1050
+        },
+        {
+            "name": "LOWERCHAMA_irrigation_loss",
+            "type": "output",
+            "max_flow": "LOWERCHAMA_irrigation_loss_sim",
+            "cost": -150
+        },
+        {
+            "name": "LOWERCHAMA_irrigation",
+            "type": "output",
+            "max_flow": "LOWERCHAMA_irrigation_sim",
+            "cost": -140
+        },
+        {
+            "name": "LOWERCHAMA_return_flow",
+            "type": "link",
+            "max_flow": "LOWERCHAMA_return_flow_sim"
+        }
+
+    ],
+    "edges": [
+        ["willow_creek_inflow","heron_inflow"],
+
+        ["azotea_tunnel_inflow","heron_inflow"],
+
+        ["heron_inflow", "heron_reservoir"],
+
+        ["heron_reservoir", "heron_release"],
+
+        ["heron_reservoir","heron_spill"],
+
+        ["heron_release", "heron_outflow"],
+
+        ["heron_spill", "heron_outflow"],
+
+        ["heron_outflow", "el_vado_inflow"],
+
+        ["heron_reservoir", "heron_pet"],
+
+        ["heron_precip", "heron_reservoir"],
+
+        ["el_vado_inflow", "el_vado_reservoir"],
+
+        ["el_vado_reservoir", "el_vado_release"],
+
+        ["el_vado_reservoir","el_vado_spill"],
+
+        ["el_vado_release", "el_vado_outflow"],
+
+        ["el_vado_spill", "el_vado_outflow"],
+
+        ["el_vado_outflow", "abiquiu_inflow"],
+
+        ["el_vado_reservoir", "el_vado_pet"],
+
+        ["el_vado_precip", "el_vado_reservoir"],
+
+        ["rio_chama_puente_inflow", "el_vado_inflow"],
+
+        ["abiquiu_reach_sideflows_inflow", "abiquiu_inflow"],
+
+        ["abiquiu_inflow", "abiquiu_reservoir"],
+
+        ["abiquiu_precip", "abiquiu_reservoir"],
+
+        ["abiquiu_reservoir", "abiquiu_release"],
+
+        ["abiquiu_reservoir", "abiquiu_spill"],
+
+        ["abiquiu_reservoir", "abiquiu_pet"],
+
+        ["abiquiu_spill", "abiquiu_outflow"],
+
+        ["abiquiu_release", "abiquiu_outflow"],
+
+        ["chamita_reach_sideflows_inflow", "abiquiu_outflow"],
+
+        ["abiquiu_outflow", "cochiti_inflow"],
+
+        ["el_vado_outflow","UPPERCHAMA_diversion_point" ],
+
+        ["UPPERCHAMA_diversion_point","UPPERCHAMA_irrigation"],
+
+        [ "UPPERCHAMA_diversion_point","UPPERCHAMA_irrigation_loss"],
+
+        [ "UPPERCHAMA_diversion_point","UPPERCHAMA_return_flow"],   
+
+        ["UPPERCHAMA_return_flow","abiquiu_inflow"],
+
+        ["abiquiu_release","LOWERCHAMA_diversion_point" ],
+
+        ["LOWERCHAMA_diversion_point","LOWERCHAMA_irrigation"],
+
+        [ "LOWERCHAMA_diversion_point","LOWERCHAMA_irrigation_loss"],
+
+        [ "LOWERCHAMA_diversion_point","LOWERCHAMA_return_flow"],   
+
+        ["LOWERCHAMA_return_flow", "abiquiu_outflow"]
+    ],
+    "parameters": {
+        "flow_willow_creek_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "willow_monthly_profile",
+                "flow_willow_creek_cfsd",
+                1.983,
+                0.17
+            ],
+            "comment": "6.7% of the flow from Willow Creek, and only March to October: calibration with observed release 2012-2019 work better with 17%"
+        },
+        "willow_monthly_profile": {
+            "comment": "from Roach thesis, only consider March to October",
+            "type": "monthlyprofileparameter",
+            "values": [
+                0,
+                0,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0
+            ]
+        },
+        "flow_willow_creek_cfsd": {
+            "type": "dataframe",
+            "url": "../input/obs_streamflow/obs_streamflow.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "willow_creek"
+        },
+        "flow_azotea_tunnel_sim": {
+            "type": "aggregated",
+            "parameters": [
+                "flow_azotea_tunnel_cfsd",
+                1.983
+            ],
+            "agg_func": "product"
+        },
+        "flow_azotea_tunnel_cfsd": {
+            "type": "dataframe",
+            "url":  "../input/obs_streamflow/obs_streamflow.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "azotea_tunnel"
+        },
+        "cost_heron_storage": {
+            "type": "controlcurveinterpolated",
+            "storage_node": "heron_reservoir",
+            "control_curves": [
+                0.9,
+                0.8,
+                0.7,
+                0.6,
+                0.5,
+                0.4,
+                0.3,
+                0.2,
+                0.1
+            ],
+            "values": [
+                0.0,
+                -100.0,
+                -200.0,
+                -300.0,
+                -400.0,
+                -500.0,
+                -600.0,
+                -700.0,
+                -800.0,
+                -900.0,
+                -1000.0
+            ]
+        },
+        "pet_over_heron": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "pet_over_heron_mm",
+                "heron_area_acre",
+                0.00328084
+            ],
+            "comment": "convert mm to ft: multiply by 0.00328084 to have PET in ac-ft"
+        },
+        "pet_over_heron_mm": {
+            "type": "dataframe",
+            "url": "../input/reservoirs/heron/pet_mm.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "pet"
+        },
+        "heron_area_acre": {
+            "type": "VolumeAreaCurve",
+            "url": [
+                "../input/reservoirs",
+                "heron"
+            ],
+            "factor": 1
+        },
+        "cost_heron_pet": {
+            "type": "constant",
+            "url": "../input/reservoirs/reservoirs_cost.csv",
+            "index_col": "Reservoir",
+            "index": "heron",
+            "column": "PETCost"
+        },
+        "precip_over_heron": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "precip_over_heron_mm",
+                0.00328084,
+                "heron_area_acre"
+            ],
+            "comment": "convert mm to feet: multiply by 0.00328084"
+        },
+        "precip_over_heron_mm": {
+            "type": "dataframe",
+            "url": "../input/reservoirs/heron/precip_mm.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "precip"
+        }, 
+        "flow_rio_chama_puente": {
+            "type": "aggregated",
+            "parameters": [
+                "flow_rio_chama_puente_cfsd",
+                1.983
+            ],
+            "agg_func": "product"
+        },
+        "flow_rio_chama_puente_cfsd": {
+            "type": "dataframe",
+            "url": "../input/obs_streamflow/obs_streamflow.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "rio_chama_puente"
+        },
+        "cost_el_vado_storage": {
+            "type": "controlcurveinterpolated",
+            "storage_node": "el_vado_reservoir",
+            "control_curves": [
+                0.9,
+                0.8,
+                0.7,
+                0.6,
+                0.5,
+                0.4,
+                0.3,
+                0.2,
+                0.1
+            ],
+            "values": [
+                0.0,
+                -100.0,
+                -200.0,
+                -300.0,
+                -400.0,
+                -500.0,
+                -600.0,
+                -700.0,
+                -800.0,
+                -900.0,
+                -1000.0
+            ]
+        },
+        "pet_over_el_vado": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "pet_over_el_vado_mm",
+                "el_vado_area_acre",
+                0.00328084,
+                1.5
+            ],
+            "comment": "calibrate the evaporation coefficient to increase evap by 50%"
+        },
+        "pet_over_el_vado_mm": {
+            "type": "dataframe",
+            "url": "../input/reservoirs/el_vado/pet_mm.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "pet"
+        },
+        "el_vado_area_acre": {
+            "type": "VolumeAreaCurve",
+            "url": [
+                "../input/reservoirs",
+                "el_vado"
+            ],
+            "factor": 1
+        },
+        "cost_el_vado_pet": {
+            "type": "constant",
+            "url": "../input/reservoirs/reservoirs_cost.csv",
+            "index_col": "Reservoir",
+            "index": "el_vado",
+            "column": "PETCost"
+        },
+        "precip_over_el_vado": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "precip_over_el_vado_mm",
+                "el_vado_area_acre",
+                0.00328084,
+                0.8
+            ],
+            "comment": "convert mm to feet: multiply by 0.00328084"
+        },
+        "precip_over_el_vado_mm": {
+            "type": "dataframe",
+            "url": "../input/reservoirs/el_vado/precip_mm.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "precip"
+        },
+        "el_vado_max_release": {
+            "type": "ElVado_max_relase"
+        },
+        "release_el_vado_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "release_el_vado_sim_cfs",
+                1.983
+            ]
+        },
+        "release_el_vado_sim_cfs": {
+            "type": "SimulatedRelease",
+            "url": {
+                "folder": "../input",
+                "name": "el_vado",
+                "predictors": [
+                    "upstr_precip",
+                    "chama_kcpet",
+                    "cum_kcpet"
+                ],
+                "type": false
+            }
+        },
+        "flow_abiquiu_reach_sideflows": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "flow_rio_ojo_caliente_cfsd",
+                1.983,
+                0.99999
+            ],
+            "comment": "add side flows at 36% of RIO OJO CALIENTE # but this value is not so good in the mass balance, so I have altered it"
+        },
+        "flow_rio_ojo_caliente_cfsd": {
+            "type": "dataframe",
+            "url": "../input/obs_streamflow/obs_streamflow.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "rio_ojo_caliente"
+        },
+        "cost_abiquiu_storage": {
+            "type": "controlcurveinterpolated",
+            "storage_node": "abiquiu_reservoir",
+            "comment": "16.67% filling level is 199,820 AF - storage pool (6,220Feet)",
+            "control_curves": [
+                0.18,
+                0.1667,
+                0.025
+            ],
+            "values": [
+                1001.0,
+                1000.0,
+                0.0,
+                -1000.0,
+                -2000.0
+            ]
+        },
+        "pet_over_abiquiu": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "pet_over_abiquiu_mm",
+                "abiquiu_area_acre",
+                0.00328084,
+                0.85
+            ]
+        },
+        "pet_over_abiquiu_mm": {
+            "type": "dataframe",
+            "url": "../input/reservoirs/abiquiu/pet_mm.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "pet"
+        },
+        "abiquiu_area_acre": {
+            "type": "VolumeAreaCurve",
+            "url": [
+                "../input/reservoirs",
+                "abiquiu"
+            ],
+            "factor": 1
+        },
+        "cost_abiquiu_pet": {
+            "type": "constant",
+            "url": "../input/reservoirs/reservoirs_cost.csv",
+            "index_col": "Reservoir",
+            "index": "abiquiu",
+            "column": "PETCost"
+        },
+        "precip_over_abiquiu": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "precip_over_abiquiu_mm",
+                0.00328084,
+                "abiquiu_area_acre"
+            ]
+        },
+        "precip_over_abiquiu_mm": {
+            "type": "dataframe",
+            "url": "../input/reservoirs/abiquiu/precip_mm.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "precip"
+        },
+        "flow_chamita_reach_sideflows": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "flow_rio_ojo_caliente_cfsd",
+                1.983,
+                1.5
+            ],
+            "comment": "side flows into chamita gauge is 2.5% of rio ojo caliente (Roach thesis)"
+        },
+        "UPPERCHAMA_diversion_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "UPPERCHAMA_diversion_calibration",
+                "irrigation_demand_UPPERCHAMA_sim"
+            ]
+        },
+        "UPPERCHAMA_diversion_calibration": {
+            "type": "constant",
+            "value": 1,
+            "comment": "correcting the aquacrop output to match observations"
+        },
+        "irrigation_demand_UPPERCHAMA_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "UPPERCHAMA_croprequirements_mm",
+                "UPPERCHAMA_area_ac",
+                0.00328084
+            ],
+            "comment": "compute the value of KC*PET*AREA; constants to convert from mm to feet"
+        },
+        "UPPERCHAMA_croprequirements_mm": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigation_requirements.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "UCHAMA"
+        },
+        "UPPERCHAMA_area_ac": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigated_areas_historical.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "UCHAMA"
+        },
+        "UPPERCHAMA_irrigation_loss_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "UPPERCHAMA_diversion_sim",
+                "UPPERCHAMA_irr_not_crop_use",
+                "UPPERCHAMA_irr_loss"
+            ]
+        },
+        "UPPERCHAMA_irr_loss": {
+            "type": "constant",
+            "value": 1,
+            "comment": "this factor decides how much of the water not used by the plants is lost vs. return flow"
+        },
+        "UPPERCHAMA_irr_not_loss": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "UPPERCHAMA_irr_loss"}],
+            "comment": "the fraction that is not lost, take 1 minus the fraction that is lost"
+        },
+        "UPPERCHAMA_irrigation_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "UPPERCHAMA_diversion_sim",
+                "UPPERCHAMA_irr_crop_use"
+            ]
+        },
+        "UPPERCHAMA_irr_crop_use": {
+            "type": "constant",
+            "value": 0.8,
+            "comment": "chinedum called this irr_eff, same idea different name, how much of the water goes there is used up by the crops"
+        },
+        "UPPERCHAMA_irr_not_crop_use": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "UPPERCHAMA_irr_crop_use"}],
+            "comment": "the fraction that is not used by the crops, what is not used by crops is split between loss & return"
+        },
+        "UPPERCHAMA_return_flow_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "UPPERCHAMA_diversion_sim",
+                "UPPERCHAMA_irr_not_crop_use",
+                "UPPERCHAMA_irr_not_loss"
+            ]
+        },
+        "LOWERCHAMA_diversion_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "LOWERCHAMA_diversion_calibration",
+                "irrigation_demand_LOWERCHAMA_sim"
+            ]
+        },
+        "LOWERCHAMA_diversion_calibration": {
+            "type": "constant",
+            "value": 1,
+            "comment": "correcting the aquacrop output to match observations"
+        },
+        "irrigation_demand_LOWERCHAMA_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "LOWERCHAMA_croprequirements_mm",
+                "LOWERCHAMA_area_ac",
+                0.00328084
+            ],
+            "comment": "compute the value of KC*PET*AREA; constants to convert from mm to feet"
+        },
+        "LOWERCHAMA_croprequirements_mm": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigation_requirements.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "LCHAMA"
+        },
+        "LOWERCHAMA_area_ac": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigated_areas_historical.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "LCHAMA"
+        },
+        "LOWERCHAMA_irrigation_loss_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "LOWERCHAMA_diversion_sim",
+                "LOWERCHAMA_irr_not_crop_use",
+                "LOWERCHAMA_irr_loss"
+            ]
+        },
+        "LOWERCHAMA_irr_loss": {
+            "type": "constant",
+            "value": 1,
+            "comment": "this factor decides how much of the water not used by the plants is lost vs. return flow"
+        },
+        "LOWERCHAMA_irr_not_loss": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "LOWERCHAMA_irr_loss"}],
+            "comment": "the fraction that is not lost, take 1 minus the fraction that is lost"
+        },
+        "LOWERCHAMA_irrigation_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "LOWERCHAMA_diversion_sim",
+                "LOWERCHAMA_irr_crop_use"
+            ]
+        },
+        "LOWERCHAMA_irr_crop_use": {
+            "type": "constant",
+            "value": 0.8
+        },
+        "LOWERCHAMA_irr_not_crop_use": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "LOWERCHAMA_irr_crop_use"}],
+            "comment": "the fraction that is not used by the crops, what is not used by crops is split between loss & return"
+        },
+        "LOWERCHAMA_return_flow_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "LOWERCHAMA_diversion_sim",
+                "LOWERCHAMA_irr_not_crop_use",
+                "LOWERCHAMA_irr_not_loss"
+            ]
+        }
+    }
+}

@@ -1,0 +1,131 @@
+{
+    "nodes": [{
+        "comment": "this json file serves as a template for writing an irrigation district in pywr, it includes the nodes, edges, and parameters (equations) needed"
+        },
+        {
+            "name": "IRRNAME_diversion_point",
+            "type": "link",
+            "max_flow": "IRRNAME_diversion_sim",
+            "cost": -1050
+        },
+        {
+            "name": "IRRNAME_irrigation_loss",
+            "type": "output",
+            "max_flow": "IRRNAME_irrigation_loss_sim",
+            "cost": -150
+        },
+        {
+            "name": "IRRNAME_irrigation",
+            "type": "output",
+            "max_flow": "IRRNAME_irrigation_sim",
+            "cost": -140
+        },
+        {
+            "name": "IRRNAME_return_flow",
+            "type": "link",
+            "max_flow": "IRRNAME_return_flow_sim"
+        }
+    ],
+
+    "edges": [
+        ["INPUT_gauge","IRRNAME_diversion_point" ],
+
+        ["IRRNAME_diversion_point","IRRNAME_irrigation"],
+
+        [ "IRRNAME_diversion_point","IRRNAME_irrigation_loss"],
+
+        [ "IRRNAME_diversion_point","IRRNAME_return_flow"],   
+
+        ["IRRNAME_return_flow","OUTPUT_gauge"]
+        
+    ],
+
+    "parameters": {
+        "IRRNAME_diversion_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "IRRNAME_diversion_calibration",
+                "irrigation_demand_IRRNAME_sim"
+            ]
+        },
+        "IRRNAME_diversion_calibration": {
+            "type": "constant",
+            "value": 2.01,
+            "comment": "correcting the aquacrop output to match observations"
+        },
+        "irrigation_demand_IRRNAME_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "IRRNAME_croprequirements_mm",
+                "IRRNAME_area_ac",
+                0.0393701,
+                0.0833333
+            ],
+            "comment": "compute the value of KC*PET*AREA; constants to convert from mm to feet"
+        },
+        "IRRNAME_croprequirements_mm": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigation_requirements.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "IRRNAME"
+        },
+        "IRRNAME_area_ac": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigated_areas_historical.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "IRRNAME"
+        },
+        "IRRNAME_irrigation_loss_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "IRRNAME_diversion_sim",
+                "IRRNAME_irr_not_crop_use",
+                "IRRNAME_irr_loss"
+            ]
+        },
+        "IRRNAME_irr_loss": {
+            "type": "constant",
+            "value": 1,
+            "comment": "this factor decides how much of the water not used by the plants is lost vs. return flow"
+        },
+        "IRRNAME_irr_not_loss": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "IRRNAME_irr_loss"}],
+            "comment": "the fraction that is not lost, take 1 minus the fraction that is lost"
+        },
+        "IRRNAME_irrigation_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "IRRNAME_diversion_sim",
+                "IRRNAME_irr_crop_use"
+            ]
+        },
+        "IRRNAME_irr_crop_use": {
+            "type": "constant",
+            "value": 0.98
+        },
+        "IRRNAME_irr_not_crop_use": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "IRRNAME_irr_crop_use"}],
+            "comment": "the fraction that is not used by the crops, what is not used by crops is split between loss & return"
+        },
+        "IRRNAME_return_flow_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "IRRNAME_diversion_sim",
+                "IRRNAME_irr_not_crop_use",
+                "IRRNAME_irr_not_loss"
+            ]
+        }
+    }
+}
+        

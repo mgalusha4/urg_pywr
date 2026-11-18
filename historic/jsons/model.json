@@ -9,13 +9,17 @@
 
     "timestepper": {
       "start": "1980-01-01",
-      "end": "1982-12-31",
+      "end": "2020-12-31",
       "timestep": "1D",
       "comment": "this script runs the historic period for this project on observed inputs"
     },
 
     "includes": [
-        "upper_rgb.json"
+        "upper_rgb.json",
+        "recorders.json",
+        "sanjuan_chama.json",
+        "mrgcd.json",
+        "texas.json"
     ],
     "nodes": [
       {
@@ -25,13 +29,6 @@
       }
     ],
     "edges": [
-      ["URG1_TAOS_return_flow", "model_outlet"]
-    ],
-    "parameters": {
-      "irr_loss_factor": {
-          "type": "constant",
-          "value": 0.5,
-          "comment": "this factor is used across many json files"
-      }
-    }
+      ["rg_fort_quitman", "model_outlet"]
+    ]
 }

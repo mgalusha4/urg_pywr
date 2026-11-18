@@ -1,0 +1,484 @@
+{
+    "nodes": [
+        {
+            "name": "elephant_butte_reservoir",
+            "type": "storage",
+            "max_volume": 2023400,
+            "min_volume": 0,
+            "cost": "cost_elephant_butte_storage"
+        },
+        {
+            "name": "elephant_butte_pet",
+            "type": "output",
+            "max_flow": "pet_over_elephant_butte_sim",
+            "cost": "cost_elephant_butte_pet"
+        },
+        {
+            "name": "elephant_butte_precip",
+            "type": "input",
+            "max_flow": "precip_over_elephant_butte",
+            "min_flow": "precip_over_elephant_butte"
+        },
+        {
+            "name": "elephant_butte_release",
+            "type": "link",
+            "max_flow": 4500
+        },
+        {
+            "name": "elephant_butte_spill",
+            "type": "link",
+            "cost": 10000
+        },
+        {
+            "name": "elephant_butte_outflow",
+            "type": "link"
+        },
+        {
+            "name": "eb_gauge",
+            "type": "link"
+        },
+        {
+            "name": "caballo_inflow",
+            "type": "link"
+        },
+        {
+            "name": "caballo_reservoir",
+            "type": "storage",
+            "max_volume": 350000,
+            "min_volume": 0,
+            "cost": "cost_caballo_storage"
+        },
+        {
+            "name": "caballo_pet",
+            "type": "output",
+            "max_flow": "pet_over_caballo_sim",
+            "cost": "cost_caballo_pet"
+        },
+        {
+            "name": "caballo_precip",
+            "type": "input",
+            "max_flow": "precip_over_caballo",
+            "min_flow": "precip_over_caballo"
+        },
+        {
+            "name": "caballo_release",
+            "type": "link",
+            "max_flow": 4500
+        },
+        {
+            "name": "caballo_spill",
+            "type": "link",
+            "cost": 10000
+        },
+        {
+            "name": "caballo_outflow",
+            "type": "link"
+        },
+        {
+            "name": "rg_elpaso",
+            "type": "link"
+        },
+        {
+            "name": "rg_fort_quitman",
+            "type": "link"
+        },
+        {
+            "name": "EBID_diversion_point",
+            "type": "link",
+            "max_flow": "EBID_diversion_sim",
+            "cost": -1050
+        },
+        {
+            "name": "EBID_irrigation_loss",
+            "type": "output",
+            "max_flow": "EBID_irrigation_loss_sim",
+            "cost": -500
+        },
+        {
+            "name": "EBID_irrigation",
+            "type": "output",
+            "max_flow": "EBID_irrigation_sim",
+            "cost": -550
+        },
+        {
+            "name": "EBID_return_flow",
+            "type": "link",
+            "max_flow": "EBID_return_flow_sim"
+        },
+        {
+            "name": "EPID_diversion_point",
+            "type": "link",
+            "max_flow": "EPID_diversion_sim",
+            "cost": -1050
+        },
+        {
+            "name": "EPID_irrigation_loss",
+            "type": "output",
+            "max_flow": "EPID_irrigation_loss_sim",
+            "cost": -500
+        },
+        {
+            "name": "EPID_irrigation",
+            "type": "output",
+            "max_flow": "EPID_irrigation_sim",
+            "cost": -550
+        },
+        {
+            "name": "EPID_return_flow",
+            "type": "link",
+            "max_flow": "EPID_return_flow_sim"
+        }
+    ],
+    "edges": [
+        ["elephant_butte_inflow", "elephant_butte_reservoir"],
+
+        ["elephant_butte_precip", "elephant_butte_reservoir"],
+
+        ["elephant_butte_reservoir", "elephant_butte_pet"],
+
+        ["elephant_butte_reservoir", "elephant_butte_release"],
+
+        ["elephant_butte_reservoir", "elephant_butte_spill"],
+
+        ["elephant_butte_release", "elephant_butte_outflow"],
+
+        ["elephant_butte_spill", "elephant_butte_outflow"],
+
+        ["elephant_butte_outflow", "eb_gauge"],
+
+        ["eb_gauge", "caballo_inflow"],
+
+        ["caballo_inflow", "caballo_reservoir"],
+
+        ["caballo_precip", "caballo_reservoir"],
+
+        ["caballo_reservoir", "caballo_pet"],
+
+        ["caballo_reservoir", "caballo_release"],
+
+        ["caballo_reservoir", "caballo_spill"],
+
+        ["caballo_release", "caballo_outflow"],
+
+        ["caballo_spill", "caballo_outflow"],
+
+        ["caballo_outflow", "rg_elpaso"],
+
+        ["rg_elpaso", "rg_fort_quitman"],
+
+        ["caballo_outflow","EBID_diversion_point" ],
+
+        ["EBID_diversion_point","EBID_irrigation"],
+
+        [ "EBID_diversion_point","EBID_irrigation_loss"],
+
+        [ "EBID_diversion_point","EBID_return_flow"],   
+
+        ["EBID_return_flow","rg_elpaso"],
+
+        ["rg_elpaso","EPID_diversion_point" ],
+
+        ["EPID_diversion_point","EPID_irrigation"],
+
+        [ "EPID_diversion_point","EPID_irrigation_loss"],
+
+        [ "EPID_diversion_point","EPID_return_flow"],   
+
+        ["EPID_return_flow","rg_fort_quitman"]
+    ],
+    "parameters": {
+        "cost_elephant_butte_storage": {
+            "type": "controlcurveinterpolated",
+            "storage_node": "elephant_butte_reservoir",
+            "control_curves": [
+                0.99,
+                0.01
+            ],
+            "values": [
+                300.0,
+                300.0,
+                -300.0,
+                -600.0
+            ]
+        },
+        "pet_over_elephant_butte_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "pet_over_elephant_butte_mm",
+                "elephant_butte_area_acre",
+                0.00328084,
+                0.4
+            ]
+        },
+        "pet_over_elephant_butte_mm": {
+            "type": "dataframe",
+            "url": "../input/reservoirs/elephant_butte/pet_mm.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "pet"
+        },
+        "elephant_butte_area_acre": {
+            "type": "VolumeAreaCurve",
+            "url": [
+                "../input/reservoirs",
+                "elephant_butte"
+            ],
+            "factor": 1
+        },
+        "cost_elephant_butte_pet": {
+            "type": "constant",
+            "url": "../input/reservoirs/reservoirs_cost.csv",
+            "index_col": "Reservoir",
+            "index": "elephant_butte",
+            "column": "PETCost"
+        },
+        "precip_over_elephant_butte": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "precip_over_elephant_butte_mm",
+                0.00328084,
+                "elephant_butte_area_acre"
+            ]
+        },
+        "precip_over_elephant_butte_mm": {
+            "type": "dataframe",
+            "url": "../input/reservoirs/elephant_butte/precip_mm.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "precip"
+        },
+        "cost_caballo_storage": {
+            "type": "controlcurveinterpolated",
+            "storage_node": "caballo_reservoir",
+            "control_curves": [
+                0.99,
+                0.01
+            ],
+            "values": [
+                300.0,
+                300.0,
+                -300.0,
+                -600.0
+            ]
+        },
+        "pet_over_caballo_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "pet_over_caballo_mm",
+                "caballo_area_acre",
+                0.00328084,
+                0.8
+            ]
+        },
+        "pet_over_caballo_mm": {
+            "type": "dataframe",
+            "url": "../input/reservoirs/caballo/pet_mm.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "pet"
+        },
+        "caballo_area_acre": {
+            "type": "VolumeAreaCurve",
+            "url": [
+                "../input/reservoirs",
+                "caballo"
+            ],
+            "factor": 1
+        },
+        "cost_caballo_pet": {
+            "type": "constant",
+            "url": "../input/reservoirs/reservoirs_cost.csv",
+            "index_col": "Reservoir",
+            "index": "caballo",
+            "column": "PETCost"
+        },
+        "precip_over_caballo": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "precip_over_caballo_mm",
+                0.00328084,
+                "caballo_area_acre",
+                1.05
+            ]
+        },
+        "precip_over_caballo_mm": {
+            "type": "dataframe",
+            "url": "../input/reservoirs/caballo/precip_mm.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "precip"
+        },
+        "EBID_diversion_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "EBID_diversion_calibration",
+                "irrigation_demand_EBID_sim"
+            ]
+        },
+        "EBID_diversion_calibration": {
+            "type": "constant",
+            "value": 0.4,
+            "comment": "correcting the aquacrop output to match observations"
+        },
+        "irrigation_demand_EBID_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "EBID_croprequirements_mm",
+                "EBID_area_ac",
+                0.00328084
+            ],
+            "comment": "compute the value of KC*PET*AREA; constants to convert from mm to feet"
+        },
+        "EBID_croprequirements_mm": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigation_requirements.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "EBID"
+        },
+        "EBID_area_ac": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigated_areas_historical.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "EBID"
+        },
+        "EBID_irrigation_loss_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "EBID_diversion_sim",
+                "EBID_irr_not_crop_use",
+                "EBID_irr_loss"
+            ]
+        },
+        "EBID_irr_loss": {
+            "type": "constant",
+            "value": 0.7,
+            "comment": "this factor decides how much of the water not used by the plants is lost vs. return flow"
+        },
+        "EBID_irr_not_loss": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "EBID_irr_loss"}],
+            "comment": "the fraction that is not lost, take 1 minus the fraction that is lost"
+        },
+        "EBID_irrigation_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "EBID_diversion_sim",
+                "EBID_irr_crop_use"
+            ]
+        },
+        "EBID_irr_crop_use": {
+            "type": "constant",
+            "value": 0.8
+        },
+        "EBID_irr_not_crop_use": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "EBID_irr_crop_use"}],
+            "comment": "the fraction that is not used by the crops, what is not used by crops is split between loss & return"
+        },
+        "EBID_return_flow_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "EBID_diversion_sim",
+                "EBID_irr_not_crop_use",
+                "EBID_irr_not_loss"
+            ]
+        },
+        "EPID_diversion_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "EPID_diversion_calibration",
+                "irrigation_demand_EPID_sim"
+            ]
+        },
+        "EPID_diversion_calibration": {
+            "type": "constant",
+            "value": 0.5,
+            "comment": "correcting the aquacrop output to match observations"
+        },
+        "irrigation_demand_EPID_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "EPID_croprequirements_mm",
+                "EPID_area_ac",
+                0.00328084
+            ],
+            "comment": "compute the value of KC*PET*AREA; constants to convert from mm to feet"
+        },
+        "EPID_croprequirements_mm": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigation_requirements.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "EPID"
+        },
+        "EPID_area_ac": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigated_areas_historical.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "EPID"
+        },
+        "EPID_irrigation_loss_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "EPID_diversion_sim",
+                "EPID_irr_not_crop_use",
+                "EPID_irr_loss"
+            ]
+        },
+        "EPID_irr_loss": {
+            "type": "constant",
+            "value": 0.7,
+            "comment": "this factor decides how much of the water not used by the plants is lost vs. return flow"
+        },
+        "EPID_irr_not_loss": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "EPID_irr_loss"}],
+            "comment": "the fraction that is not lost, take 1 minus the fraction that is lost"
+        },
+        "EPID_irrigation_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "EPID_diversion_sim",
+                "EPID_irr_crop_use"
+            ]
+        },
+        "EPID_irr_crop_use": {
+            "type": "constant",
+            "value": 0.8
+        },
+        "EPID_irr_not_crop_use": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [1, {"type": "negative", "parameter": "EPID_irr_crop_use"}],
+            "comment": "the fraction that is not used by the crops, what is not used by crops is split between loss & return"
+        },
+        "EPID_return_flow_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "EPID_diversion_sim",
+                "EPID_irr_not_crop_use",
+                "EPID_irr_not_loss"
+            ]
+        }
+    }
+}

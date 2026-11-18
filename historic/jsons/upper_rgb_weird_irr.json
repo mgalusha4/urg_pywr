@@ -1,0 +1,339 @@
+{
+    "nodes": [
+        {
+            "name": "lobatos_gauge_inflow",
+            "type": "input",
+            "max_flow": "flow_lobatos_sim",
+            "min_flow": "flow_lobatos_sim"
+        },
+        {
+            "name": "rio_pueblo_taos_inflow",
+            "type": "input",
+            "max_flow": "flow_rio_pueblo_taos_sim",
+            "min_flow": "flow_rio_pueblo_taos_sim"
+        },
+        {
+            "name": "cerro_gauge",
+            "type": "link"
+        },
+        {
+            "name": "URG1_TAOS_diversion_point",
+            "type": "link",
+            "max_flow": "URG1_TAOS_diversion_sim",
+            "cost": -1050
+        },
+        {
+            "name": "URG1_TAOS_irrigation_loss",
+            "type": "output",
+            "max_flow": "URG1_TAOS_loss_sim",
+            "cost": -150
+        },
+        {
+            "name": "URG1_TAOS_irrigation",
+            "type": "output",
+            "max_flow": "URG1_TAOS_depletion_sim",
+            "cost": -140
+        },
+        {
+            "name": "URG1_TAOS_return_flow",
+            "type": "link",
+            "max_flow": {
+                "type": "aggregated",
+                "agg_func": "sum",
+                "parameters": [
+                    "URG1_TAOS_delivery_sim",
+                    {
+                        "type": "negative",
+                        "parameter": "URG1_TAOS_depletion_sim"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "embudo_gauge",
+            "type": "link"
+        },
+        {
+            "name": "URG2_EMB_diversion_point",
+            "type": "link",
+            "max_flow": "URG2_EMB_diversion_sim",
+            "cost": -1050
+        },
+        {
+            "name": "URG2_EMB_irrigation_loss",
+            "type": "output",
+            "max_flow": "URG2_EMB_loss_sim",
+            "cost": -150
+        },
+        {
+            "name": "URG2_EMB_irrigation",
+            "type": "output",
+            "max_flow": "URG2_EMB_depletion_sim",
+            "cost": -140
+        },
+        {
+            "name": "URG2_EMB_return_flow",
+            "type": "link",
+            "max_flow": {
+                "type": "aggregated",
+                "agg_func": "sum",
+                "parameters": [
+                    "URG2_EMB_delivery_sim",
+                    {
+                        "type": "negative",
+                        "parameter": "URG2_EMB_depletion_sim"
+                    }
+                ]
+            }
+        }
+    ],
+
+    "edges": [
+        [
+            "lobatos_gauge_inflow",
+            "cerro_gauge"
+        ],
+        [
+            "rio_pueblo_taos_inflow",
+            "cerro_gauge"
+        ],
+        [
+            "cerro_gauge",
+            "URG1_TAOS_diversion_point"
+        ],
+        [
+            "URG1_TAOS_diversion_point",
+            "URG1_TAOS_irrigation"
+        ],
+        [
+            "URG1_TAOS_diversion_point",
+            "URG1_TAOS_irrigation_loss"
+        ],
+        [
+            "URG1_TAOS_diversion_point",
+            "URG1_TAOS_return_flow"
+        ],      
+        [
+            "URG1_TAOS_return_flow", 
+            "embudo_gauge"
+        ],
+        [
+            "cerro_gauge", 
+            "embudo_gauge"
+        ],
+        [
+            "embudo_gauge",
+            "URG2_EMB_diversion_point"
+        ],
+        [
+            "URG2_EMB_diversion_point",
+            "URG2_EMB_return_flow"
+        ],
+        [
+            "URG2_EMB_diversion_point",
+            "URG2_EMB_irrigation_loss"
+        ],
+        [
+            "URG2_EMB_diversion_point",
+            "URG2_EMB_irrigation"
+        ]
+    ],
+
+    "parameters": {
+        "flow_lobatos_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "flow_lobatos_cfsd",
+                1.983,
+                1.5
+            ]
+        },
+        "flow_lobatos_cfsd": {
+            "type": "dataframe",
+            "url": "../input/obs_streamflow/obs_streamflow.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "lobatos_gauge"
+        },
+        "flow_rio_pueblo_taos_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "flow_rio_pueblo_taos_cfsd",
+                1.983,
+                1.5
+            ]
+        },
+        "flow_rio_pueblo_taos_cfsd": {
+            "type": "dataframe",
+            "url": "../input/obs_streamflow/obs_streamflow.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "rio_pueblo_taos"
+        },
+        "URG1_TAOS_diversion_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "URG1_TAOS_diversion_calibration",
+                "irrigation_demand_URG1_TAOS_sim"
+            ]
+        },
+        "URG1_TAOS_diversion_calibration": {
+            "type": "constant",
+            "value": 2.01,
+            "comment": "correcting the aquacrop output to match observations"
+        },
+        "irrigation_demand_URG1_TAOS_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "URG1_TAOS_croprequirements_mm",
+                "URG1_TAOS_area_ac",
+                0.0393701,
+                0.0833333
+            ],
+            "comment": "compute the value of KC*PET*AREA; constants to convert from mm to feet"
+        },
+        "URG1_TAOS_croprequirements_mm": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigation_requirements.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "URG1"
+        },
+        "URG1_TAOS_area_ac": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigated_areas_historical.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "URG1"
+        },
+        "URG1_TAOS_loss_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "URG1_TAOS_diversion_sim",
+                "URG1_TAOS_irr_loss"
+            ]
+        },
+        "URG1_TAOS_irr_loss": {
+            "type": "constant",
+            "value": 1,
+            "comment": "this factor decides how much of the water not used by the plants is lost vs. return flow"
+        },
+        "URG1_TAOS_depletion_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "URG1_TAOS_delivery_sim",
+                "URG1_TAOS_irr_eff"
+            ]
+        },
+        "URG1_TAOS_irr_eff": {
+            "type": "constant",
+            "value": 0.98
+        },
+        "URG1_TAOS_delivery_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "URG1_TAOS_diversion_sim",
+                {
+                    "type": "aggregated",
+                    "agg_func": "sum",
+                    "parameters": [
+                        1,
+                        {
+                            "type": "negative",
+                            "parameter": "URG1_TAOS_irr_loss"
+                        }
+                    ]
+                }
+            ]
+        },
+        "URG2_EMB_diversion_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "URG2_EMB_diversion_calibration",
+                "irrigation_demand_URG2_EMB_sim"
+            ]
+        },
+        "URG2_EMB_diversion_calibration": {
+            "type": "constant",
+            "value": 2.01,
+            "comment": "correcting the aquacrop output to match observations"
+        },
+        "irrigation_demand_URG2_EMB_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "URG2_EMB_croprequirements_mm",
+                "URG2_EMB_area_ac",
+                0.0393701,
+                0.0833333
+            ],
+            "comment": "compute the value of KC*PET*AREA; constants to convert from mm to feet"
+        },
+        "URG2_EMB_croprequirements_mm": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigation_requirements.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "URG2"
+        },
+        "URG2_EMB_area_ac": {
+            "type": "dataframe",
+            "url": "../input/obs_irrigation/irrigated_areas_historical.csv",
+            "index_col": "date",
+            "parse_dates": true,
+            "column": "URG2"
+        },
+        "URG2_EMB_loss_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "URG2_EMB_diversion_sim",
+                "URG2_EMB_irr_loss"
+            ]
+        },
+        "URG2_EMB_irr_loss": {
+            "type": "constant",
+            "value": 1,
+            "comment": "this factor decides how much of the water not used by the plants is lost vs. return flow"
+        },
+        "URG2_EMB_depletion_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "URG2_EMB_delivery_sim",
+                "URG2_EMB_irr_eff"
+            ]
+        },
+        "URG2_EMB_irr_eff": {
+            "type": "constant",
+            "value": 0.98
+        },
+        "URG2_EMB_delivery_sim": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "URG2_EMB_diversion_sim",
+                {
+                    "type": "aggregated",
+                    "agg_func": "sum",
+                    "parameters": [
+                        1,
+                        {
+                            "type": "negative",
+                            "parameter": "URG2_EMB_irr_loss"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+        
